@@ -62,6 +62,8 @@ fn build_leveldb(snappy_prefix: Option<PathBuf>) {
 
         config
             .define("HAVE_SNAPPY", "ON")
+            .define("CMAKE_PREFIX_PATH", snappy_prefix.display().to_string())
+            .define("CMAKE_LIBRARY_PATH", snappy_prefix.join(LIBDIR).display().to_string())
             .cflag(format!("-I{}", snappy_prefix.join("include").display()))
             .cxxflag(format!("-I{}", snappy_prefix.join("include").display()));
     } else {
